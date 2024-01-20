@@ -1,0 +1,322 @@
+/* Reset styles for all elements */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Base styles for the body */
+body {
+  font-family: Arial, sans-serif;
+  line-height: 1.6;
+}
+
+/* Styles for the header and footer */
+header,
+footer {
+  background: rgb(255, 255, 255);
+  color: rgb(0, 0, 0);
+  text-align: center;
+  padding: 1rem 0;
+  width: 100%;
+}
+
+/* Styles for the footer */
+footer {
+  bottom: 0;
+}
+
+/* Styles for the main content area */
+main {
+  display: grid;
+  grid-template-areas:
+    "grid1"
+    "grid2";
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+}
+
+/* Styles for the first grid area */
+.grid1 {
+  grid-area: grid1;
+  display: grid;
+  grid-template-areas:
+    "input1 table6"
+    "input2 table6"
+    "input3 table6"
+    "input4 table6"
+    "input5 table6";
+  gap: 0.5rem;
+  padding: 1rem;
+  justify-items: left;
+  min-width: 65rem;
+  margin: 0 auto;
+}
+
+/* Styles for the second grid area */
+.grid2 {
+  grid-area: grid2;
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 1rem;
+  padding: 1rem;
+  align-items: center;
+  min-width: 90%;
+  margin: 0 auto;
+}
+
+/* Styles for sections */
+section {
+  margin-bottom: 1rem;
+}
+
+/* Styles for text input fields */
+input[type="text"] {
+  width: 100%;
+  margin: 0.5rem;
+  padding: 0.5rem;
+}
+
+/* Styles for buttons */
+button {
+  padding: 0.5rem;
+  margin: 0.5rem;
+  cursor: pointer;
+}
+
+/* Styles for increment buttons */
+.increment-button {
+  background-color: rgb(215, 255, 199);
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 4px;
+  color: rgb(60, 64, 67);
+}
+
+.increment-button:hover {
+  border-color: rgb(218, 220, 224);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 1px;
+  color: rgb(32, 33, 36);
+}
+
+.increment-button:focus {
+  border-color: rgba(23, 23, 23, 1);
+  outline: none;
+}
+
+/* Styles for reset buttons */
+.reset-button {
+  background-color: rgba(228, 173, 173, 1);
+  border: 1px solid rgb(189, 189, 189);
+  border-radius: 4px;
+  color: rgb(60, 64, 67);
+}
+
+.reset-button:hover {
+  border-color: rgb(218, 220, 224);
+  box-shadow: rgba(0, 0, 0, 0.1) 0 1px 1px;
+  color: rgb(32, 33, 36);
+}
+
+.reset-button:focus {
+  border-color: rgba(23, 23, 23, 1);
+  outline: none;
+}
+
+/* Styles for tables */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+/* Styles for table headers and cells */
+th,
+td {
+  border: 1px solid rgb(221, 221, 221);
+  padding: 0.5rem;
+  text-align: center;
+}
+
+/* Styles for specific grid areas */
+.unit-cost {
+  grid-area: input1;
+}
+
+.current-level {
+  grid-area: input2;
+}
+
+.rolling-gold {
+  grid-area: input3;
+}
+
+.num-copies {
+  grid-area: input4;
+}
+
+.same-cost-units {
+  grid-area: input5;
+}
+
+.probability-table {
+  grid-area: table6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-width: 100%;
+}
+
+/* Styles for details and summary elements */
+details {
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border: 1px solid rgb(221, 221, 221);
+  border-radius: 0.5rem;
+  background-color: rgb(247, 250, 252);
+}
+
+summary {
+  font-weight: bold;
+  cursor: pointer;
+}
+
+details ol {
+  padding-left: 1rem;
+}
+
+details p {
+  padding-left: 1rem;
+}
+
+/* Styles for specific elements within grid areas */
+.increment-button,
+.reset-button {
+  margin-left: 5px;
+}
+
+.same-cost-units,
+.rolling-gold,
+.num-copies {
+  display: flex;
+  flex-direction: column;
+}
+
+.same-cost-units input,
+.rolling-gold input,
+.num-copies input {
+  height: 40px;
+  width: 60px;
+}
+
+.same-cost-units button,
+.rolling-gold button,
+.num-copies button {
+  width: 72px;
+}
+
+.same-cost-units h3,
+.rolling-gold h3,
+.num-copies h3 {
+}
+
+.same-cost-units div,
+.rolling-gold div,
+.num-copies div {
+  display: flex;
+}
+
+/* Styles for specific elements with IDs */
+#sameCostUnits,
+#rollingGold,
+#numCopies {
+  text-align: center;
+  font-size: 1.2em;
+}
+
+#unitCost,
+#currentLevel {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20rem;
+  height: 1.25rem;
+  border-radius: 0.5rem;
+  background: rgb(211, 211, 211);
+  outline: none;
+  margin: 0 0.5rem;
+}
+
+#unitCost::-webkit-slider-thumb,
+#currentLevel::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  width: 1.5625rem;
+  height: 1.5625rem;
+  border-radius: 50%;
+  background: rgb(51, 51, 51);
+  cursor: pointer;
+}
+
+#unitCost::-moz-range-thumb,
+#currentLevel::-moz-range-thumb {
+  appearance: none;
+  width: 1.5625rem;
+  height: 1.5625rem;
+  border-radius: 50%;
+  background: rgb(51, 51, 51);
+  cursor: pointer;
+}
+
+#unitCost::-ms-thumb,
+#currentLevel::-ms-thumb {
+  appearance: none;
+  width: 1.5625rem;
+  height: 1.5625rem;
+  border-radius: 50%;
+  background: rgb(51, 51, 51);
+  cursor: pointer;
+}
+
+/* Styles for the slider container */
+.slider-container {
+  display: flex;
+  align-items: center;
+}
+
+/* Styles for specific elements with IDs */
+#unitCostOutput,
+#currentLevelOutput {
+  margin-left: 1rem;
+  font-size: 1.2em;
+  width: 3em;
+  text-align: center;
+}
+
+/* Styles for the patch version */
+.patch-version {
+  margin: 0.5rem;
+}
+
+/* Media queries for responsive design */
+@media (max-width: 1100px) {
+  .grid1 {
+    min-width: 0rem;
+    margin: 0 1rem;
+  }
+}
+
+@media (max-width: 700px) {
+  .grid1 {
+    grid-template-areas:
+      "input1"
+      "input2"
+      "input3"
+      "input4"
+      "input5"
+      "table6";
+    grid-template-columns: 1fr;
+    justify-items: center;
+  }
+  .grid2 {
+    min-width: 80%;
+  }
+}

@@ -1,0 +1,438 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Web application for calculating Teamfight Tactics (TFT) rolling probabilities based on player level and desired unit cost."
+    />
+    <meta
+      name="keywords"
+      content="Teamfight Tactics, TFT, rolling probabilities, TFT calculator, TFT stats, TFT rolling strategy, auto chess, League of Legends strategy, TFT guide"
+    />
+    <meta name="author" content="Mingson Leung" />
+    <title>TFT Rolling Statistics</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon" />
+    <link rel="stylesheet" href="css/style.css" />
+  </head>
+
+  <body>
+    <header>
+      <image src="img/gamble.png" alt="TFT Gambling Image" />
+      <h1>TFT Rolling Statistics</h1>
+    </header>
+
+    <main>
+      <section class="grid1">
+        <section class="unit-cost">
+          <h3 id="unit-cost">Desired Unit Cost</h3>
+          <div class="slider-container">
+            <input
+              type="range"
+              id="unitCost"
+              name="unitCost"
+              min="1"
+              max="5"
+              step="1"
+              value="1"
+            />
+            <output name="unitCostOutput" id="unitCostOutput">1</output>
+          </div>
+        </section>
+
+        <section class="current-level">
+          <h3 id="current-level">Current Level</h3>
+          <div class="slider-container">
+            <input
+              type="range"
+              id="currentLevel"
+              name="currentLevel"
+              min="1"
+              max="10"
+              step="1"
+              value="1"
+            />
+            <output name="currentLevelOutput" id="currentLevelOutput">1</output>
+          </div>
+        </section>
+
+        <section class="rolling-gold">
+          <h3 id="rolling-gold">Amount of Rolling Gold</h3>
+          <div>
+            <input
+              type="text"
+              id="rollingGold"
+              name="rollingGold"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+              minlength="1"
+              maxlength="3"
+              value="0"
+            />
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('rollingGold', 1)"
+            >
+              +1
+            </button>
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('rollingGold', 5)"
+            >
+              +5
+            </button>
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('rollingGold', 10)"
+            >
+              +10
+            </button>
+            <button
+              type="button"
+              class="reset-button"
+              onclick="resetField('rollingGold')"
+            >
+              Reset
+            </button>
+          </div>
+        </section>
+
+        <section class="num-copies">
+          <h3 id="num-copies">Number of Existing Copies</h3>
+          <div>
+            <input
+              type="text"
+              id="numCopies"
+              name="numCopies"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+              minlength="1"
+              maxlength="2"
+              value="0"
+            />
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('numCopies', 1)"
+            >
+              +1
+            </button>
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('numCopies', 2)"
+            >
+              +2
+            </button>
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('numCopies', 3)"
+            >
+              +3
+            </button>
+            <button
+              type="button"
+              class="reset-button"
+              onclick="resetField('numCopies')"
+            >
+              Reset
+            </button>
+          </div>
+        </section>
+
+        <section class="same-cost-units">
+          <h3 id="same-cost-units">Number of Same Cost Units</h3>
+          <div>
+            <input
+              type="text"
+              id="sameCostUnits"
+              name="sameCostUnits"
+              pattern="[0-9]*"
+              inputmode="numeric"
+              onkeypress="return event.charCode >= 48 && event.charCode <= 57"
+              minlength="1"
+              maxlength="2"
+              value="0"
+            />
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('sameCostUnits', 1)"
+            >
+              +1
+            </button>
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('sameCostUnits', 2)"
+            >
+              +2
+            </button>
+            <button
+              type="button"
+              class="increment-button"
+              onclick="incrementField('sameCostUnits', 3)"
+            >
+              +3
+            </button>
+            <button
+              type="button"
+              class="reset-button"
+              onclick="resetField('sameCostUnits')"
+            >
+              Reset
+            </button>
+          </div>
+        </section>
+
+        <section class="probability-table">
+          <table id="probabilityTable">
+            <thead>
+              <tr>
+                <th>Number of Units</th>
+                <th>Chance of Hitting</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr id="prob-1">
+                <td>1</td>
+                <td id="chance-1">0%</td>
+              </tr>
+              <tr id="prob-2">
+                <td>2</td>
+                <td id="chance-2">0%</td>
+              </tr>
+              <tr id="prob-3">
+                <td>3</td>
+                <td id="chance-3">0%</td>
+              </tr>
+              <tr id="prob-4">
+                <td>4</td>
+                <td id="chance-4">0%</td>
+              </tr>
+              <tr id="prob-5">
+                <td>5</td>
+                <td id="chance-5">0%</td>
+              </tr>
+              <tr id="prob-6">
+                <td>6</td>
+                <td id="chance-6">0%</td>
+              </tr>
+              <tr id="prob-7">
+                <td>7</td>
+                <td id="chance-7">0%</td>
+              </tr>
+              <tr id="prob-8">
+                <td>8</td>
+                <td id="chance-8">0%</td>
+              </tr>
+              <tr id="prob-9">
+                <td>9</td>
+                <td id="chance-9">0%</td>
+              </tr>
+            </tbody>
+          </table>
+        </section>
+      </section>
+      <section class="grid2">
+        <section class="extra-details">
+          <details>
+            <summary>Current Patch's Re-Roll Chances</summary>
+            <h3 class="patch-version">Patch: 14.1 (Set 10)</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Level</th>
+                  <th>Tier 1 (22 Total)</th>
+                  <th>Tier 2 (20 Total)</th>
+                  <th>Tier 3 (17 Total)</th>
+                  <th>Tier 4 (10 Total)</th>
+                  <th>Tier 5 (9 Total)</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>100%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>100%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>75%</td>
+                  <td>25%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>55%</td>
+                  <td>30%</td>
+                  <td>15%</td>
+                  <td>0%</td>
+                  <td>0%</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>45%</td>
+                  <td>33%</td>
+                  <td>20%</td>
+                  <td>2%</td>
+                  <td>0%</td>
+                </tr>
+                <tr>
+                  <td>6</td>
+                  <td>30%</td>
+                  <td>40%</td>
+                  <td>25%</td>
+                  <td>5%</td>
+                  <td>0%</td>
+                </tr>
+                <tr>
+                  <td>7</td>
+                  <td>19%</td>
+                  <td>35%</td>
+                  <td>35%</td>
+                  <td>10%</td>
+                  <td>1%</td>
+                </tr>
+                <tr>
+                  <td>8</td>
+                  <td>18%</td>
+                  <td>25%</td>
+                  <td>36%</td>
+                  <td>18%</td>
+                  <td>3%</td>
+                </tr>
+                <tr>
+                  <td>9</td>
+                  <td>10%</td>
+                  <td>20%</td>
+                  <td>25%</td>
+                  <td>35%</td>
+                  <td>10%</td>
+                </tr>
+                <tr>
+                  <td>10</td>
+                  <td>5%</td>
+                  <td>10%</td>
+                  <td>20%</td>
+                  <td>40%</td>
+                  <td>25%</td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+
+          <details>
+            <summary>Current Patch's Unique Champions</summary>
+            <h3 class="patch-version">Patch: 14.1 (Set 10)</h3>
+            <table>
+              <thead>
+                <tr>
+                  <th>Tier</th>
+                  <th>Unique Champions</th> 
+                  <th>Total Copies</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>1</td>
+                  <td>13</td>
+                  <td>22</td>
+                </tr>
+                <tr>
+                  <td>2</td>
+                  <td>13</td>
+                  <td>20</td>
+                </tr>
+                <tr>
+                  <td>3</td>
+                  <td>13</td>
+                  <td>17</td>
+                </tr>
+                <tr>
+                  <td>4</td>
+                  <td>13</td>
+                  <td>10</td>
+                </tr>
+                <tr>
+                  <td>5</td>
+                  <td>8</td>
+                  <td>9</td>
+                </tr>
+              </tbody>
+            </table>
+          </details>
+
+          <details>
+            <summary>Simple Probability Breakdown</summary>
+            <ol>
+              <li>
+                Check your odds of seeing the unit type you want (based on your
+                level).
+              </li>
+              <li>
+                Calculate the odds of the specific unit appearing in a slot
+                (considering the pool size).
+              </li>
+              <li>Combine these odds for all slots in a shop.</li>
+              <li>
+                Use Markov Chains (a series of matrices) to calculate how these
+                odds change with multiple rerolls.
+              </li>
+              <li>
+                The final matrix after these calculations gives you the
+                probability of getting the desired number of units after your
+                rerolls.
+              </li>
+            </ol>
+          </details>
+
+          <details>
+            <summary>In-Depth Probability Breakdown</summary>
+            <p style="color: red">To-Do: In-Progress</p>
+          </details>
+
+          <details>
+            <summary>Developer Notes</summary>
+            <p>
+              Source Code:
+              <a href="https://github.com/mingsonleung/tft-rolling-statistics" target="_blank"
+                >GitHub Repository</a
+              >
+            </p>
+            <p>Last Updated: 01/19/2024</p>
+          </details>
+        </section>
+      </section>
+    </main>
+
+    <footer>
+      <p>&copy; 2024 TFT Stats</p>
+    </footer>
+
+    <noscript>
+      <p>Please enable JavaScript to use this application.</p>
+    </noscript>
+    <script src="js/script.js"></script>
+  </body>
+</html>
