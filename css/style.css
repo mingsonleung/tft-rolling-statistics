@@ -5,7 +5,7 @@
   box-sizing: border-box;
 }
 
-/* Base styles for the body */
+/* Global styles for the body */
 body {
   font-family: Arial, sans-serif;
   line-height: 1.6;
@@ -67,7 +67,7 @@ main {
   margin: 0 auto;
 }
 
-/* Styles for sections */
+/* Styles for sections within the grid */
 section {
   margin-bottom: 1rem;
 }
@@ -86,7 +86,7 @@ button {
   cursor: pointer;
 }
 
-/* Styles for increment buttons */
+/* Styles for the increment button */
 .increment-button {
   background-color: rgb(215, 255, 199);
   border: 1px solid rgb(189, 189, 189);
@@ -94,18 +94,20 @@ button {
   color: rgb(60, 64, 67);
 }
 
+/* Styles for the increment button on hover */
 .increment-button:hover {
   border-color: rgb(218, 220, 224);
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 1px;
   color: rgb(32, 33, 36);
 }
 
+/* Styles for the increment button on focus */
 .increment-button:focus {
   border-color: rgba(23, 23, 23, 1);
   outline: none;
 }
 
-/* Styles for reset buttons */
+/* Styles for the reset button */
 .reset-button {
   background-color: rgba(228, 173, 173, 1);
   border: 1px solid rgb(189, 189, 189);
@@ -113,12 +115,14 @@ button {
   color: rgb(60, 64, 67);
 }
 
+/* Styles for the reset button on hover */
 .reset-button:hover {
   border-color: rgb(218, 220, 224);
   box-shadow: rgba(0, 0, 0, 0.1) 0 1px 1px;
   color: rgb(32, 33, 36);
 }
 
+/* Styles for the reset button on focus */
 .reset-button:focus {
   border-color: rgba(23, 23, 23, 1);
   outline: none;
@@ -189,7 +193,7 @@ details p {
   padding-left: 1rem;
 }
 
-/* Styles for specific elements within grid areas */
+/* Styles for specific elements within the grid */
 .increment-button,
 .reset-button {
   margin-left: 5px;
@@ -299,8 +303,14 @@ details p {
 /* Media queries for responsive design */
 @media (max-width: 1100px) {
   .grid1 {
-    min-width: 0rem;
+    min-width: 0;
     margin: 0 1rem;
+  }
+
+  #unitCost,
+  #currentLevel {
+    width: 100%;
+    max-width: 20rem;
   }
 }
 
@@ -315,8 +325,27 @@ details p {
       "table6";
     grid-template-columns: 1fr;
     justify-items: center;
+    min-width: 0;
   }
-  .grid2 {
-    min-width: 80%;
+
+  .same-cost-units input,
+  .rolling-gold input,
+  .num-copies input,
+  .same-cost-units button,
+  .rolling-gold button,
+  .num-copies button {
+    width: 100%;
+    max-width: 72px;
   }
 }
+
+/* Styles for elements with possible overflow */
+.element-with-possible-overflow {
+  overflow: auto;
+}
+
+/* DEBUG STYLE 
+* {
+  border: 1px solid red !important;
+}
+*/
